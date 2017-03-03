@@ -47,7 +47,7 @@ begin
 	require 'terminal-table'
 
 	if ARGV[0] =~ /-/
-		@browser = Watir::Browser.new :firefox
+		@browser = Watir::Browser.new
 		@browser.goto 'https://m.facebook.com'
 	else
 		help
