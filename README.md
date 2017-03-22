@@ -4,8 +4,7 @@ browser automation script for bruteforcing facebook .
 ```
 gem install 'watir-webdriver'
 gem install  'terminal-table'
-require 'colorize'
-
+gem install 'colorize'
 ```
 ## install chrome browser too
 ```
