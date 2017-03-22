@@ -8,25 +8,27 @@ catch :ctrl_c do
 begin
 
 	system("clear")
-	puts '___________    _____    ________    ________       _____     _|=|_   '.yellow
-	puts '\_   _____/   /  _  \   \______ \   \_____  \     /     \   /     \  '.yellow
-	puts ' |    __)    /  /_\  \   |    |  \   /   |   \   /  \ /  \ ( (| |) ) '.yellow
-	puts ' |     \    /    |    \  |    `   \ /    |    \ /    Y    \ \_   _/  '.yellow
-	puts ' \___  /    \____|__  / /_______  / \_______  / \____|__  /   | |    '.yellow
-	puts '     \/             \/          \/          \/          \/    |_|    '.yellow
-	puts '                       CODED BY MAGDY MOUSTAFA                    '.red
+	puts '	 (             (         )     *     (     '.red
+	puts '	 )\ )    (     )\ )   ( /(   (  `    )\ )  '.red
+	puts '	(()/(    )\   (()/(   )\())  )\))(  (()/(  '.red
+	puts '	 /(_))((((_)(  /(_)) ((_)\  ((_)()\  /(_)) '.red
+	puts '	(_))_|'.blue + ' )\ _ )\(_))_    ((_) (_()((_)(_))    '.yellow
+	puts '	| |_  '.blue + '  (_)_\(_)|   \  / _ \ |  \/  ||_ _|  '.yellow
+	puts '	| __| '.blue + '   / _ \  | |) || (_) || |\/| | | |   '.yellow
+	puts '	|_|   '.blue + '  /_/ \_\ |___/  \___/ |_|  |_||___|  '.yellow
+	puts '     		  CODED BY MAGDY MOUSTAGA		 '.white
 	puts ''
 	def help
-		puts "|[   -db => show database successful logins , use with clear '-dbs clear' to delete database "
-		puts "|[   -m1 , --mode1 => bruteforce in range"
-		puts "|[   -m1+ , --mode1+ => dictionary attack on username and password from the same list"
-		puts "|[   -m2 , --mode2 => dictionary attack on username with password list"
-		puts "|[   -ttf , --targets-to-find => set the numbers of targets to find ( Optional ) "
-		puts "|[   usage. ruby Fadomi.rb [ option ] [ parameter 1 ] [ parameter 2 ] ... "
-		puts "|[   eg. ruby Fadomi.rb -db"
-		puts "|[   eg. ruby Fadomi.rb -m1 01061031400 01061031500 -ttf 3 "
-		puts "|[   eg. ruby Fadomi.rb -m1+ phone_numbers_list.txt "
-		puts "|[   eg. ruby Fadomi.rb --mode2 ashgan11 password_list.txt" 
+		puts "|[   -db => show database successful logins , use with clear '-dbs clear' to delete database ".green
+		puts "|[   -m1 , --mode1 => bruteforce in range".green
+		puts "|[   -m1+ , --mode1+ => dictionary attack on username and password from the same list".green
+		puts "|[   -m2 , --mode2 => dictionary attack on username with password list".green
+		puts "|[   -ttf , --targets-to-find => set the numbers of targets to find ( Optional ) ".green
+		puts "|[   usage. ruby Fadomi.rb [ option ] [ parameter 1 ] [ parameter 2 ] ... ".green
+		puts "|[   eg. ruby Fadomi.rb -db".green
+		puts "|[   eg. ruby Fadomi.rb -m1 01061031400 01061031500 -ttf 3 ".green
+		puts "|[   eg. ruby Fadomi.rb -m1+ phone_numbers_list.txt ".green
+		puts "|[   eg. ruby Fadomi.rb --mode2 ashgan11 password_list.txt".green 
 		exit
 	end
 	if ARGV[0] == "-db"
