@@ -26,7 +26,7 @@ begin
 		puts "|[   -ttf , --targets-to-find => set the numbers of targets to find ( Optional ) ".green
 		puts "|[   usage. ruby Fadomi.rb [ option ] [ parameter 1 ] [ parameter 2 ] ... ".green
 		puts "|[   eg. ruby Fadomi.rb -db".green
-		puts "|[   eg. ruby Fadomi.rb -m1 01061031400 01061031500 -ttf 3 ".green
+		puts "|[   eg. ruby Fadomi.rb -m1 phone_number_end_with_400 phone_number_end_with_500 -ttf 3 ".green
 		puts "|[   eg. ruby Fadomi.rb -m1+ phone_numbers_list.txt ".green
 		puts "|[   eg. ruby Fadomi.rb --mode2 ashgan11 password_list.txt".green 
 		exit
